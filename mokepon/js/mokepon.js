@@ -4,6 +4,7 @@ let vidasJugador = 3;
 let vidasEnemigo = 3;
 
 function iniciarJuego() {
+  console.log("iniciando el juego");
   let botonMascotaJugador = document.getElementById("boton-mascota");
   botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);
 
@@ -13,6 +14,9 @@ function iniciarJuego() {
   botonAgua.addEventListener("click", ataqueAgua);
   let botonTierra = document.getElementById("boton-tierra");
   botonTierra.addEventListener("click", ataqueTierra);
+
+  let botonReiniciar = document.getElementById("boton-reiniciar");
+  botonReiniciar.addEventListener("click", reiniciar);
 }
 
 function seleccionarMascotaJugador() {
@@ -48,6 +52,7 @@ function seleccionarMascotaEnemigo() {
 }
 
 function ataqueFuego() {
+  console.log("atacando con fuego");
   ataqueJugador = "FUEGO";
   ataqueAleatorioEnemigo();
 }
@@ -104,9 +109,37 @@ function combate() {
 function revisarVidas() {
   if (vidasEnemigo == 0) {
     crearMensajeFinal("Felicitaciones ganaste");
+    toggleBotones(true);
   } else if (vidasJugador == 0) {
     crearMensajeFinal("Lo siento, perdiste");
+    toggleBotones(true);
   }
+}
+
+function toggleBotones(estado) {
+  let botonFuego = document.getElementById("boton-fuego");
+  let botonAgua = document.getElementById("boton-agua");
+  let botonTierra = document.getElementById("boton-tierra");
+
+  botonFuego.disabled = estado;
+  botonAgua.disabled = estado;
+  botonTierra.disabled = estado;
+}
+
+function reiniciar() {
+  console.log("reiniciando");
+  vidasEnemigo = 3;
+  vidasJugador = 3;
+
+  let spanVidasJugador = document.getElementById("vidas-jugador");
+  let spanVidasEnemigo = document.getElementById("vidas-enemigo");
+
+  spanVidasEnemigo.innerHTML = vidasEnemigo;
+  spanVidasJugador.innerHTML = vidasJugador;
+
+  toggleBotones(false);
+
+  vaciarMensaje();
 }
 
 function crearMensaje(resultado) {
@@ -131,6 +164,12 @@ function crearMensajeFinal(resultadoFinal) {
   parrafo.innerHTML = resultadoFinal;
 
   sectionMensaje.appendChild(parrafo);
+}
+
+function vaciarMensaje() {
+  console.log("eliminando msj");
+  let sectionMensaje = document.getElementById("mensajes");
+  sectionMensaje.innerHTML = " ";
 }
 
 function aleatorio(min, max) {
