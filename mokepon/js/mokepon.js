@@ -126,7 +126,7 @@ function toggleBotones(estado) {
   botonTierra.disabled = estado;
 }
 
-function reiniciar() {
+/*function reiniciar() {
   console.log("reiniciando");
   vidasEnemigo = 3;
   vidasJugador = 3;
@@ -140,7 +140,7 @@ function reiniciar() {
   toggleBotones(false);
 
   vaciarMensaje();
-}
+}*/
 
 function crearMensaje(resultado) {
   let sectionMensaje = document.getElementById("mensajes");
@@ -164,12 +164,23 @@ function crearMensajeFinal(resultadoFinal) {
   parrafo.innerHTML = resultadoFinal;
 
   sectionMensaje.appendChild(parrafo);
+
+  let botonFuego = document.getElementById("boton-fuego");
+  botonFuego.disabled = true;
+  let botonAgua = document.getElementById("boton-agua");
+  botonAgua.disabled = true;
+  let botonTierra = document.getElementById("boton-tierra");
+  botonTierra.disabled = true;
 }
 
-function vaciarMensaje() {
+/*function vaciarMensaje() {
   console.log("eliminando msj");
   let sectionMensaje = document.getElementById("mensajes");
   sectionMensaje.innerHTML = " ";
+}*/
+
+function reiniciar() {
+  location.reload();
 }
 
 function aleatorio(min, max) {
