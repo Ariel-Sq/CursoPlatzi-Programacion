@@ -9,6 +9,9 @@ function iniciarJuego() {
   let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
   sectionSeleccionarAtaque.style.display = "none";
 
+  let sectionBotonReiniciar = document.getElementById("boton-reiniciar");
+  sectionBotonReiniciar.style.display = "none";
+
   let botonMascotaJugador = document.getElementById("boton-mascota");
   botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);
 
@@ -183,6 +186,9 @@ function crearMensajeFinal(resultadoFinal) {
   botonAgua.disabled = true;
   let botonTierra = document.getElementById("boton-tierra");
   botonTierra.disabled = true;
+
+  let sectionBotonReiniciar = document.getElementById("boton-reiniciar");
+  sectionBotonReiniciar.style.display = "block";
 }
 
 /*function vaciarMensaje() {
