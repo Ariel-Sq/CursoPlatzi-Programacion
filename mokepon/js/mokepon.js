@@ -5,6 +5,10 @@ let vidasEnemigo = 3;
 
 function iniciarJuego() {
   console.log("iniciando el juego");
+
+  let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+  sectionSeleccionarAtaque.style.display = "none";
+
   let botonMascotaJugador = document.getElementById("boton-mascota");
   botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);
 
@@ -20,6 +24,14 @@ function iniciarJuego() {
 }
 
 function seleccionarMascotaJugador() {
+  let sectionSeleccionarMascota = document.getElementById(
+    "Seleccionar-mascota"
+  );
+  sectionSeleccionarMascota.style.display = "none";
+
+  let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+  sectionSeleccionarAtaque.style.display = "block";
+
   let inputHipodogue = document.getElementById("hipodogue");
   let inputCapipepo = document.getElementById("capipepo");
   let inputRatigueya = document.getElementById("ratigueya");
@@ -109,14 +121,14 @@ function combate() {
 function revisarVidas() {
   if (vidasEnemigo == 0) {
     crearMensajeFinal("Felicitaciones ganaste");
-    toggleBotones(true);
+    //toggleBotones(true);
   } else if (vidasJugador == 0) {
     crearMensajeFinal("Lo siento, perdiste");
-    toggleBotones(true);
+    //toggleBotones(true);
   }
 }
 
-function toggleBotones(estado) {
+/*function toggleBotones(estado) {
   let botonFuego = document.getElementById("boton-fuego");
   let botonAgua = document.getElementById("boton-agua");
   let botonTierra = document.getElementById("boton-tierra");
