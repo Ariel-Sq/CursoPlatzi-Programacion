@@ -11,3 +11,27 @@
     justify-content: center;
     align-items: center;
 }
+
+.tarjeta-mokepon {
+    width: 100px;
+    height: 100px;
+    background: rgb(191, 243, 226);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid  darkred ;
+}
+
+input {
+    display: none;
+}
+
+#boton-mascota {
+    width: 100px;
+    height: 25px;
+    background-color: darkgray;
+    padding: 4px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid darkred;
+}
