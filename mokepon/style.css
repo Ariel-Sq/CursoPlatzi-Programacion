@@ -5,23 +5,9 @@
     background-color: burlywood;
 }
 
-label {
-    color: burlywood;
-    background-color: brown;
-    width: 330px;
-    height: 50px;
-}
-
-input {
-    color: burlywood;
-    background-color:coral;
-    width: 330px;
-    height: 50px;
-}
-
-button {
-    color: darkred;
-    width: 330px;
-    height: 50px;
-    background-color: burlywood;
+#Seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
