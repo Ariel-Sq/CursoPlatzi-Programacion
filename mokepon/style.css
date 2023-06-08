@@ -24,7 +24,7 @@ body {
     font-size: 20px;
 }
 
-.tarjetas {
+.tarjetas, .tarjetas-ataques {
     display: flex;
     gap: 10px;
 }
@@ -123,4 +123,10 @@ input {
     display: grid;
     grid-template-columns: 100px 100px;
     text-align: center;
+}
+
+@media (max-width: 360px) {
+    .tarjetas, .tarjetas-ataques {
+        flex-direction: column;
+    }
 }
