@@ -119,3 +119,8 @@ input {
     color: #66a5ad;
 }
 
+.ataques {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    text-align: center;
+}
