@@ -9,9 +9,7 @@ const botonReiniciar = document.getElementById("boton-reiniciar");
 const sectionSeleccionarMascota = document.getElementById(
   "Seleccionar-mascota"
 );
-const inputHipodogue = document.getElementById("hipodogue");
-const inputCapipepo = document.getElementById("capipepo");
-const inputRatigueya = document.getElementById("ratigueya");
+
 const spanMascotaJugador = document.getElementById("mascota-jugador");
 
 const spanMascotaEnemigo = document.getElementById("mascota-enemigo");
@@ -28,6 +26,9 @@ let mokepones = [];
 let ataqueJugador;
 let ataqueEnemigo;
 let opcionDeMokepones;
+let inputHipodogue;
+let inputCapipepo;
+let inputRatigueya;
 let vidasJugador = 3;
 let vidasEnemigo = 3;
 
@@ -80,10 +81,13 @@ function iniciarJuego() {
         <input type="radio" name="mascota" id=${mokepon.nombre} />
         <label class="tarjeta-mokepon" for=${mokepon.nombre}>
           <p>${mokepon.nombre}</p>
-          <img src=${mokepon.foto} alt=${mokepon.nombre}
-        /></label>`;
+          <img src=${mokepon.foto} alt=${mokepon.nombre} /></label>`;
 
     contenedorTarjetas.innerHTML += opcionDeMokepones;
+
+    inputHipodogue = document.getElementById("Hipodogue");
+    inputCapipepo = document.getElementById("Capipepo");
+    inputRatigueya = document.getElementById("Ratigueya");
   });
 
   sectionBotonReiniciar.style.display = "none";
@@ -103,11 +107,11 @@ function seleccionarMascotaJugador() {
   sectionSeleccionarAtaque.style.display = "flex";
 
   if (inputHipodogue.checked) {
-    spanMascotaJugador.innerHTML = "Hipodogue";
+    spanMascotaJugador.innerHTML = inputHipodogue.id;
   } else if (inputCapipepo.checked) {
-    spanMascotaJugador.innerHTML = "Capipepo";
+    spanMascotaJugador.innerHTML = inputCapipepo.id;
   } else if (inputRatigueya.checked) {
-    spanMascotaJugador.innerHTML = "Ratigueya";
+    spanMascotaJugador.innerHTML = inputRatigueya.id;
   } else {
     alert("Selecciona una mascota");
   }
