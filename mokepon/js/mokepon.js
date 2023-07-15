@@ -172,9 +172,9 @@ function secuenciaAtaque() {
         console.log(ataqueJugador);
         boton.style.background = "#112f58";
       }
+      ataqueAleatorioEnemigo();
     });
   });
-  ataqueAleatorioEnemigo();
 }
 
 function ataqueAleatorioEnemigo() {
