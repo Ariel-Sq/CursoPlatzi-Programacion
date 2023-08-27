@@ -28,6 +28,9 @@ let opcionDeMokepones;
 let inputHipodogue;
 let inputCapipepo;
 let inputRatigueya;
+let inputNess;
+let inputYeti;
+let inputFenix;
 let ataquesMokepon;
 let ataquesMokeponEnemigo;
 let botonFuego;
@@ -44,17 +47,21 @@ let vidasJugador = 3;
 let vidasEnemigo = 3;
 
 class Mokepon {
-  constructor(nombre, foto, vida) {
+  constructor(nombre, foto, vida, tipo) {
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
+    this.tipo = tipo;
     this.ataques = [];
   }
 }
 
-let hipodogue = new Mokepon("Hipodogue", "img/hipodogue.png", 5);
-let capipepo = new Mokepon("Capipepo", "img/capipepo.png", 5);
-let ratigueya = new Mokepon("Ratigueya", "img/ratigueya.png", 5);
+let hipodogue = new Mokepon("Hipodogue", "img/hipodogue.png", 5, "tipo agua");
+let capipepo = new Mokepon("Capipepo", "img/capipepo.png", 5, "tipo tierra");
+let ratigueya = new Mokepon("Ratigueya", "img/ratigueya.png", 5, "tipo fuego");
+let ness = new Mokepon("Ness", "img/Ness.png", 5, "tipo agua");
+let yeti = new Mokepon("Yeti", "img/Yeti.png", 5, "tipo tierra");
+let fenix = new Mokepon("Fenix", "img/Fenix.png", 5, "tipo fuego");
 
 hipodogue.ataques.push(
   { nombre: "💧", id: "boton-agua" },
@@ -80,7 +87,31 @@ ratigueya.ataques.push(
   { nombre: "💧", id: "boton-agua" }
 );
 
-mokepones.push(hipodogue, capipepo, ratigueya);
+ness.ataques.push(
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" }
+);
+
+yeti.ataques.push(
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" }
+);
+
+fenix.ataques.push(
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧", id: "boton-agua" }
+);
+
+mokepones.push(hipodogue, capipepo, ratigueya, ness, yeti, fenix);
 
 function iniciarJuego() {
   /* console.log("iniciando el juego"); */
@@ -99,6 +130,9 @@ function iniciarJuego() {
     inputHipodogue = document.getElementById("Hipodogue");
     inputCapipepo = document.getElementById("Capipepo");
     inputRatigueya = document.getElementById("Ratigueya");
+    inputNess = document.getElementById("Ness");
+    inputYeti = document.getElementById("Yeti");
+    inputFenix = document.getElementById("Fenix");
   });
 
   sectionBotonReiniciar.style.display = "none";
@@ -122,6 +156,15 @@ function seleccionarMascotaJugador() {
   } else if (inputRatigueya.checked) {
     spanMascotaJugador.innerHTML = inputRatigueya.id;
     mascotaJugador = inputRatigueya.id;
+  } else if (inputNess.checked) {
+    spanMascotaJugador.innerHTML = inputNess.id;
+    mascotaJugador = inputNess.id;
+  } else if (inputYeti.checked) {
+    spanMascotaJugador.innerHTML = inputYeti.id;
+    mascotaJugador = inputYeti.id;
+  } else if (inputFenix.checked) {
+    spanMascotaJugador.innerHTML = inputFenix.id;
+    mascotaJugador = inputFenix.id;
   } else {
     alert("Selecciona una mascota");
   }
@@ -168,14 +211,17 @@ function secuenciaAtaque() {
         ataqueJugador.push("FUEGO");
         console.log(ataqueJugador);
         boton.style.background = "#112f58";
+        boton.disabled = true;
       } else if (e.target.textContent === "💧") {
         ataqueJugador.push("AGUA");
         console.log(ataqueJugador);
         boton.style.background = "#112f58";
+        boton.disabled = true;
       } else {
         ataqueJugador.push("TIERRA");
         console.log(ataqueJugador);
         boton.style.background = "#112f58";
+        boton.disabled = true;
       }
       ataqueAleatorioEnemigo();
     });
@@ -300,10 +346,6 @@ function crearMensaje(resultado) {
 
 function crearMensajeFinal(resultadoFinal) {
   sectionMensaje.innerHTML = resultadoFinal;
-
-  botonFuego.disabled = true;
-  botonAgua.disabled = true;
-  botonTierra.disabled = true;
 
   sectionBotonReiniciar.style.display = "block";
 }
