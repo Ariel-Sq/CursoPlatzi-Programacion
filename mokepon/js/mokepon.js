@@ -3,6 +3,9 @@ const sectionBotonReiniciar = document.getElementById("boton-reiniciar");
 const botonMascotaJugador = document.getElementById("boton-mascota");
 const botonReiniciar = document.getElementById("boton-reiniciar");
 
+const sectionVerMapa = document.getElementById("ver-mapa");
+const mapa = document.getElementById("mapa");
+
 const sectionSeleccionarMascota = document.getElementById(
   "Seleccionar-mascota"
 );
@@ -41,10 +44,12 @@ let ataque;
 let indexAtaqueJugador;
 let indexAtaqueEnemigo;
 let mascotaJugador;
+let mascotaAleatoria;
 let victoriasJugador = 0;
 let victoriasEnemigo = 0;
 let vidasJugador = 3;
 let vidasEnemigo = 3;
+let lienzo = mapa.getContext("2d");
 
 class Mokepon {
   constructor(nombre, foto, vida, tipo) {
@@ -56,12 +61,12 @@ class Mokepon {
   }
 }
 
-let hipodogue = new Mokepon("Hipodogue", "img/hipodogue.png", 5, "tipo agua");
-let capipepo = new Mokepon("Capipepo", "img/capipepo.png", 5, "tipo tierra");
-let ratigueya = new Mokepon("Ratigueya", "img/ratigueya.png", 5, "tipo fuego");
-let ness = new Mokepon("Ness", "img/Ness.png", 5, "tipo agua");
-let yeti = new Mokepon("Yeti", "img/Yeti.png", 5, "tipo tierra");
-let fenix = new Mokepon("Fenix", "img/Fenix.png", 5, "tipo fuego");
+let hipodogue = new Mokepon("Hipodogue", "img/hipodogue.png", 5);
+let capipepo = new Mokepon("Capipepo", "img/capipepo.png", 5);
+let ratigueya = new Mokepon("Ratigueya", "img/ratigueya.png", 5);
+let ness = new Mokepon("Ness", "img/Ness.png", 5);
+let yeti = new Mokepon("Yeti", "img/Yeti.png", 5);
+let fenix = new Mokepon("Fenix", "img/Fenix.png", 5);
 
 hipodogue.ataques.push(
   { nombre: "💧", id: "boton-agua" },
@@ -117,6 +122,7 @@ function iniciarJuego() {
   /* console.log("iniciando el juego"); */
 
   sectionSeleccionarAtaque.style.display = "none";
+  sectionVerMapa.style.display = "none";
 
   mokepones.forEach((mokepon) => {
     opcionDeMokepones = `
@@ -145,7 +151,11 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
   sectionSeleccionarMascota.style.display = "none";
 
-  sectionSeleccionarAtaque.style.display = "flex";
+  // sectionSeleccionarAtaque.style.display = "flex";
+  sectionVerMapa.style.display = "flex";
+  let imagenDeCapipepo = new Image();
+  imagenDeCapipepo.src = capipepo.foto;
+  lienzo.drawImage(imagenDeCapipepo, 20, 40, 100, 100);
 
   if (inputHipodogue.checked) {
     spanMascotaJugador.innerHTML = inputHipodogue.id;
@@ -174,10 +184,11 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMascotaEnemigo() {
-  let mascotaAleatoria = aleatorio(0, mokepones.length - 1);
+  mascotaAleatoria = aleatorio(0, mokepones.length - 1);
 
   spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre;
   ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques;
+
   secuenciaAtaque();
 }
 
