@@ -63,12 +63,15 @@ class Mokepon {
     this.ataques = [];
     this.x = x;
     this.y = y;
-    this.ancho = 80;
-    this.alto = 80;
+    this.ancho = 40;
+    this.alto = 40;
     this.avatar = new Image();
     this.avatar.src = avatar;
     this.velocidadX = 0;
     this.velocidadY = 0;
+  }
+  pintarMokepon() {
+    lienzo.drawImage(this.avatar, this.x, this.y, this.ancho, this.alto);
   }
 }
 
@@ -93,6 +96,34 @@ let ratigueya = new Mokepon(
 let ness = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
 let yeti = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
 let fenix = new Mokepon("Fenix", "img/fenix2.png", 5, "img/fenix2.png");
+
+let hipodogueEnemigo = new Mokepon(
+  "Hipodogue",
+  "img/hipodogue.png",
+  5,
+  "img/hipodogueCara.png",
+  80,
+  120
+);
+let capipepoEnemigo = new Mokepon(
+  "Capipepo",
+  "img/capipepo.png",
+  5,
+  "img/capipepoCara.png",
+  150,
+  95
+);
+let ratigueyaEnemigo = new Mokepon(
+  "Ratigueya",
+  "img/ratigueya.png",
+  5,
+  "img/ratigueyaCara.png",
+  200,
+  190
+);
+let nessEnemigo = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
+let yetiEnemigo = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
+let fenixEnemigo = new Mokepon("Fenix", "img/fenix2.png", 5, "img/fenix2.png");
 
 hipodogue.ataques.push(
   { nombre: "💧", id: "boton-agua" },
@@ -409,13 +440,10 @@ function pintarCanvas() {
 
   //lienzo.clearRect(0, 0, mapa.width, mapa.height);
   lienzo.drawImage(mapaBackground, 0, 0, mapa.width, mapa.height);
-  lienzo.drawImage(
-    mascotaJugadorObjeto.avatar,
-    mascotaJugadorObjeto.x,
-    mascotaJugadorObjeto.y,
-    mascotaJugadorObjeto.ancho,
-    mascotaJugadorObjeto.alto
-  );
+  mascotaJugadorObjeto.pintarMokepon();
+  hipodogueEnemigo.pintarMokepon();
+  capipepoEnemigo.pintarMokepon();
+  ratigueyaEnemigo.pintarMokepon();
 }
 
 function moverDerecha() {
