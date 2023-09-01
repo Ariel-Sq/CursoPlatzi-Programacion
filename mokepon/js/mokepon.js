@@ -53,32 +53,46 @@ let vidasEnemigo = 3;
 let lienzo = mapa.getContext("2d");
 let intervalo;
 let mapaBackground = new Image();
-mapaBackground.src = "./img/mokemap.png";
+mapaBackground.src = "img/mokeMap.png";
 
 class Mokepon {
-  constructor(nombre, foto, vida, tipo) {
+  constructor(nombre, foto, vida, avatar, x = 10, y = 10) {
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
-    this.tipo = tipo;
     this.ataques = [];
-    this.x = 20;
-    this.y = 30;
+    this.x = x;
+    this.y = y;
     this.ancho = 80;
     this.alto = 80;
-    this.mapaFoto = new Image();
-    this.mapaFoto.src = foto;
+    this.avatar = new Image();
+    this.avatar.src = avatar;
     this.velocidadX = 0;
     this.velocidadY = 0;
   }
 }
 
-let hipodogue = new Mokepon("Hipodogue", "img/hipodogue.png", 5);
-let capipepo = new Mokepon("Capipepo", "img/capipepo.png", 5);
-let ratigueya = new Mokepon("Ratigueya", "img/ratigueya.png", 5);
-let ness = new Mokepon("Ness", "img/Ness.png", 5);
-let yeti = new Mokepon("Yeti", "img/Yeti.png", 5);
-let fenix = new Mokepon("Fenix", "img/Fenix.png", 5);
+let hipodogue = new Mokepon(
+  "Hipodogue",
+  "img/hipodogue.png",
+  5,
+  "img/hipodogueCara.png"
+);
+let capipepo = new Mokepon(
+  "Capipepo",
+  "img/capipepo.png",
+  5,
+  "img/capipepoCara.png"
+);
+let ratigueya = new Mokepon(
+  "Ratigueya",
+  "img/ratigueya.png",
+  5,
+  "img/ratigueyaCara.png"
+);
+let ness = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
+let yeti = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
+let fenix = new Mokepon("Fenix", "img/fenix2.png", 5, "img/fenix2.png");
 
 hipodogue.ataques.push(
   { nombre: "💧", id: "boton-agua" },
@@ -392,10 +406,11 @@ function pintarCanvas() {
     mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX;
   mascotaJugadorObjeto.y =
     mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY;
-  lienzo.clearRect(0, 0, mapa.width, mapa.height);
+
+  //lienzo.clearRect(0, 0, mapa.width, mapa.height);
   lienzo.drawImage(mapaBackground, 0, 0, mapa.width, mapa.height);
   lienzo.drawImage(
-    mascotaJugadorObjeto.mapaFoto,
+    mascotaJugadorObjeto.avatar,
     mascotaJugadorObjeto.x,
     mascotaJugadorObjeto.y,
     mascotaJugadorObjeto.ancho,
