@@ -121,11 +121,40 @@ let ratigueyaEnemigo = new Mokepon(
   200,
   190
 );
-let nessEnemigo = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
-let yetiEnemigo = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
-let fenixEnemigo = new Mokepon("Fenix", "img/fenix2.png", 5, "img/fenix2.png");
+let nessEnemigo = new Mokepon(
+  "Ness",
+  "img/Ness.png",
+  5,
+  "img/Ness.png",
+  60,
+  180
+);
+let yetiEnemigo = new Mokepon(
+  "Yeti",
+  "img/Yeti.png",
+  5,
+  "img/Yeti.png",
+  280,
+  100
+);
+let fenixEnemigo = new Mokepon(
+  "Fenix",
+  "img/fenix2.png",
+  5,
+  "img/fenix2.png",
+  270,
+  10
+);
 
 hipodogue.ataques.push(
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" }
+);
+
+hipodogueEnemigo.ataques.push(
   { nombre: "💧", id: "boton-agua" },
   { nombre: "💧", id: "boton-agua" },
   { nombre: "💧", id: "boton-agua" },
@@ -141,7 +170,23 @@ capipepo.ataques.push(
   { nombre: "🔥", id: "boton-fuego" }
 );
 
+capipepoEnemigo.ataques.push(
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" }
+);
+
 ratigueya.ataques.push(
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧", id: "boton-agua" }
+);
+
+ratigueyaEnemigo.ataques.push(
   { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🔥", id: "boton-fuego" },
@@ -157,6 +202,14 @@ ness.ataques.push(
   { nombre: "🌱", id: "boton-tierra" }
 );
 
+nessEnemigo.ataques.push(
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" }
+);
+
 yeti.ataques.push(
   { nombre: "🌱", id: "boton-tierra" },
   { nombre: "🌱", id: "boton-tierra" },
@@ -165,7 +218,23 @@ yeti.ataques.push(
   { nombre: "🔥", id: "boton-fuego" }
 );
 
+yetiEnemigo.ataques.push(
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" }
+);
+
 fenix.ataques.push(
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧", id: "boton-agua" }
+);
+
+fenixEnemigo.ataques.push(
   { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🔥", id: "boton-fuego" },
@@ -208,7 +277,6 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
   sectionSeleccionarMascota.style.display = "none";
 
-  // sectionSeleccionarAtaque.style.display = "flex";
   sectionVerMapa.style.display = "flex";
 
   if (inputHipodogue.checked) {
@@ -234,15 +302,15 @@ function seleccionarMascotaJugador() {
   }
 
   extraerAtaques(mascotaJugador);
+  sectionVerMapa.style.display = "flex";
   iniciarMapa();
-  seleccionarMascotaEnemigo();
 }
 
-function seleccionarMascotaEnemigo() {
+function seleccionarMascotaEnemigo(enemigo) {
   mascotaAleatoria = aleatorio(0, mokepones.length - 1);
 
-  spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre;
-  ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques;
+  spanMascotaEnemigo.innerHTML = enemigo.nombre;
+  ataquesMokeponEnemigo = enemigo.ataques;
 
   secuenciaAtaque();
 }
@@ -444,6 +512,20 @@ function pintarCanvas() {
   hipodogueEnemigo.pintarMokepon();
   capipepoEnemigo.pintarMokepon();
   ratigueyaEnemigo.pintarMokepon();
+  nessEnemigo.pintarMokepon();
+  yetiEnemigo.pintarMokepon();
+  fenixEnemigo.pintarMokepon();
+  if (
+    mascotaJugadorObjeto.velocidadX !== 0 ||
+    mascotaJugadorObjeto.velocidadY !== 0
+  ) {
+    revisarColision(hipodogueEnemigo);
+    revisarColision(capipepoEnemigo);
+    revisarColision(ratigueyaEnemigo);
+    revisarColision(nessEnemigo);
+    revisarColision(yetiEnemigo);
+    revisarColision(fenixEnemigo);
+  }
 }
 
 function moverDerecha() {
@@ -503,6 +585,33 @@ function obtenerObjetoMascota() {
       return mokepones[i];
     }
   }
+}
+
+function revisarColision(enemigo) {
+  const arribaEnemigo = enemigo.y;
+  const abajoEnemigo = enemigo.y + enemigo.alto;
+  const derechaEnemigo = enemigo.x + enemigo.ancho;
+  const izquierdaEnemigo = enemigo.x;
+
+  const arribaMascota = mascotaJugadorObjeto.y;
+  const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto;
+  const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho;
+  const izquierdaMascota = mascotaJugadorObjeto.x;
+
+  if (
+    abajoMascota < arribaEnemigo ||
+    arribaMascota > abajoEnemigo ||
+    derechaMascota < izquierdaEnemigo ||
+    izquierdaMascota > derechaEnemigo
+  ) {
+    return;
+  }
+
+  detenerMovimiento();
+  clearInterval(intervalo);
+  sectionSeleccionarAtaque.style.display = "flex";
+  sectionVerMapa.style.display = "none";
+  seleccionarMascotaEnemigo(enemigo);
 }
 
 window.addEventListener("load", iniciarJuego);
