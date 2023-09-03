@@ -363,15 +363,31 @@ function secuenciaAtaque() {
 }
 
 function ataqueAleatorioEnemigo() {
-  let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1);
+  /* Ejemplo de ataque enemigo eligiendo a Hipodogue:
+    ataquesMokeponEnemigo = [
+      { nombre: "💧", id: "boton-agua" },
+      { nombre: "💧", id: "boton-agua" },
+      { nombre: "💧", id: "boton-agua" },
+      { nombre: "🔥", id: "boton-fuego" },
+      { nombre: "🌱", id: "boton-tierra" }
+    ]
+  */
 
-  if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
-    ataqueEnemigo.push("FUEGO");
-  } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
-    ataqueEnemigo.push("AGUA");
+  const indice = aleatorio(0, ataquesMokeponEnemigo.length - 1);
+  const ataqueAleatorio = ataquesMokeponEnemigo[indice];
+  ataquesMokeponEnemigo.splice(indice, 1);
+
+  let ataque = "";
+  if (ataqueAleatorio.nombre === "💧") {
+    ataque = "AGUA";
+  } else if (ataqueAleatorio.nombre === "🔥") {
+    ataque = "FUEGO";
   } else {
-    ataqueEnemigo.push("TIERRA");
+    ataque = "TIERRA";
   }
+
+  ataqueEnemigo.push(ataque);
+
   console.log(ataqueEnemigo);
   iniciarPelea();
 }
