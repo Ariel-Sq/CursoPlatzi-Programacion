@@ -54,17 +54,28 @@ let lienzo = mapa.getContext("2d");
 let intervalo;
 let mapaBackground = new Image();
 mapaBackground.src = "img/mokeMap.png";
+let alturaQueBuscamos;
+let anchoDelMapa = window.innerWidth - 20;
+const anchoMaximoDelMapa = 350;
+if (anchoDelMapa > anchoMaximoDelMapa) {
+  anchoDelMapa = anchoMaximoDelMapa - 20;
+}
+
+alturaQueBuscamos = (anchoDelMapa * 600) / 800;
+
+mapa.width = anchoDelMapa;
+mapa.height = alturaQueBuscamos;
 
 class Mokepon {
-  constructor(nombre, foto, vida, avatar, x = 10, y = 10) {
+  constructor(nombre, foto, vida, avatar) {
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
     this.ataques = [];
-    this.x = x;
-    this.y = y;
     this.ancho = 40;
     this.alto = 40;
+    this.x = aleatorio(0, mapa.width - this.ancho);
+    this.y = aleatorio(0, mapa.height - this.alto);
     this.avatar = new Image();
     this.avatar.src = avatar;
     this.velocidadX = 0;
@@ -101,42 +112,22 @@ let hipodogueEnemigo = new Mokepon(
   "Hipodogue",
   "img/hipodogue.png",
   5,
-  "img/hipodogueCara.png",
-  80,
-  120
+  "img/hipodogueCara.png"
 );
 let capipepoEnemigo = new Mokepon(
   "Capipepo",
   "img/capipepo.png",
   5,
-  "img/capipepoCara.png",
-  150,
-  95
+  "img/capipepoCara.png"
 );
 let ratigueyaEnemigo = new Mokepon(
   "Ratigueya",
   "img/ratigueya.png",
   5,
-  "img/ratigueyaCara.png",
-  200,
-  190
+  "img/ratigueyaCara.png"
 );
-let nessEnemigo = new Mokepon(
-  "Ness",
-  "img/Ness.png",
-  5,
-  "img/Ness.png",
-  60,
-  180
-);
-let yetiEnemigo = new Mokepon(
-  "Yeti",
-  "img/Yeti.png",
-  5,
-  "img/Yeti.png",
-  280,
-  100
-);
+let nessEnemigo = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
+let yetiEnemigo = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
 let fenixEnemigo = new Mokepon(
   "Fenix",
   "img/fenix2.png",
@@ -585,8 +576,6 @@ function sePresionoUnaTecla(event) {
 }
 
 function iniciarMapa() {
-  mapa.width = 320;
-  mapa.height = 240;
   mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador);
   intervalo = setInterval(pintarCanvas, 50);
 
