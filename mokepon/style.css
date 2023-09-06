@@ -136,6 +136,12 @@ input:checked + label {
     grid-template-columns: 100px 100px;
     text-align: center;
 }
+/* darle direccion column a la seccion de movimiento (ArielSq) */
+#movimiento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 #ver-mapa {
     flex-direction: column;
@@ -143,10 +149,30 @@ input:checked + label {
     justify-content: center;
 }
 
-@media (max-width: 360px) {
+#ver-mapa button {
+    width: 80px;
+    height: 50px;
+    border-radius: 35px;
+    background: transparent; 
+    border: 3px solid #c4dfe6;;
+    color: #c4dfe6;
+    font-family: 'Paytone One', sans-serif;
+    /*box-sizing: border-box;*/
+    margin: 10px 3px;
+}
+
+@media (max-width: 560px) {
     .tarjetas, .tarjetas-ataques {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual ancho */
         gap: 10px; /* Espacio entre tarjetas */
+    }
+}
+
+@media (max-width: 300px) {
+    #ver-mapa div {
+        display: flex;
+        align-items: center;
+       flex-direction: column;
     }
 }
