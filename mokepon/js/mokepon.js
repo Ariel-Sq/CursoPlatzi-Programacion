@@ -272,7 +272,7 @@ function unirseAlJuego() {
   fetch("http://localhost:8080/unirse").then(function (res) {
     if (res.ok) {
       res.text().then(function (respuesta) {
-        console.log(respuesta);
+        console.log("respuesta: ", respuesta);
         jugadorId = respuesta;
       });
     }
@@ -541,9 +541,12 @@ function pintarCanvas() {
   mascotaJugadorObjeto.y =
     mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY;
 
-  //lienzo.clearRect(0, 0, mapa.width, mapa.height);
+  lienzo.clearRect(0, 0, mapa.width, mapa.height);
   lienzo.drawImage(mapaBackground, 0, 0, mapa.width, mapa.height);
   mascotaJugadorObjeto.pintarMokepon();
+
+  enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y);
+
   hipodogueEnemigo.pintarMokepon();
   capipepoEnemigo.pintarMokepon();
   ratigueyaEnemigo.pintarMokepon();
@@ -561,6 +564,20 @@ function pintarCanvas() {
     revisarColision(yetiEnemigo);
     revisarColision(fenixEnemigo);
   }
+}
+
+function enviarPosicion(x, y) {
+  console.log("jugadorId: ", jugadorId);
+  fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      x,
+      y,
+    }),
+  });
 }
 
 function moverDerecha() {
@@ -605,7 +622,7 @@ function sePresionoUnaTecla(event) {
 
 function iniciarMapa() {
   mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador);
-  intervalo = setInterval(pintarCanvas, 50);
+  intervalo = setInterval(pintarCanvas, 500);
 
   window.addEventListener("keydown", sePresionoUnaTecla);
 
