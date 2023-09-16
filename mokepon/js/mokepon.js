@@ -68,7 +68,8 @@ mapa.width = anchoDelMapa;
 mapa.height = alturaQueBuscamos;
 
 class Mokepon {
-  constructor(nombre, foto, vida, avatar) {
+  constructor(nombre, foto, vida, avatar, id = null) {
+    this.id = id;
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
@@ -109,130 +110,65 @@ let ness = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
 let yeti = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
 let fenix = new Mokepon("Fenix", "img/fenix2.png", 5, "img/fenix2.png");
 
-let hipodogueEnemigo = new Mokepon(
-  "Hipodogue",
-  "img/hipodogue.png",
-  5,
-  "img/hipodogueCara.png"
-);
-let capipepoEnemigo = new Mokepon(
-  "Capipepo",
-  "img/capipepo.png",
-  5,
-  "img/capipepoCara.png"
-);
-let ratigueyaEnemigo = new Mokepon(
-  "Ratigueya",
-  "img/ratigueya.png",
-  5,
-  "img/ratigueyaCara.png"
-);
-let nessEnemigo = new Mokepon("Ness", "img/Ness.png", 5, "img/Ness.png");
-let yetiEnemigo = new Mokepon("Yeti", "img/Yeti.png", 5, "img/Yeti.png");
-let fenixEnemigo = new Mokepon(
-  "Fenix",
-  "img/fenix2.png",
-  5,
-  "img/fenix2.png",
-  270,
-  10
-);
+const HIPODOGUE_ATAQUES = [
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱", id: "boton-tierra" },
+];
 
-hipodogue.ataques.push(
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" }
-);
+hipodogue.ataques.push(...HIPODOGUE_ATAQUES);
 
-hipodogueEnemigo.ataques.push(
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
+const CAPIPEPO_ATAQUES = [
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
   { nombre: "💧", id: "boton-agua" },
   { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" }
-);
+];
 
-capipepo.ataques.push(
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" }
-);
+capipepo.ataques.push(...CAPIPEPO_ATAQUES);
 
-capipepoEnemigo.ataques.push(
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
+const RATIGUEYA_ATAQUES = [
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🌱", id: "boton-tierra" },
   { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" }
-);
+];
 
-ratigueya.ataques.push(
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" }
-);
+ratigueya.ataques.push(...RATIGUEYA_ATAQUES);
 
-ratigueyaEnemigo.ataques.push(
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
+const NESS_ATAQUES = [
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
+  { nombre: "💧", id: "boton-agua" },
   { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" }
-);
+];
 
-ness.ataques.push(
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" }
-);
+ness.ataques.push(...NESS_ATAQUES);
 
-nessEnemigo.ataques.push(
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
+const YETI_ATAQUES = [
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🌱", id: "boton-tierra" },
   { nombre: "💧", id: "boton-agua" },
   { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" }
-);
+];
 
-yeti.ataques.push(
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
+yeti.ataques.push(...YETI_ATAQUES);
+
+const FENIX_ATAQUES = [
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🔥", id: "boton-fuego" },
   { nombre: "🌱", id: "boton-tierra" },
   { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" }
-);
+];
 
-yetiEnemigo.ataques.push(
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" }
-);
-
-fenix.ataques.push(
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" }
-);
-
-fenixEnemigo.ataques.push(
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" }
-);
+fenix.ataques.push(...FENIX_ATAQUES);
 
 mokepones.push(hipodogue, capipepo, ratigueya, ness, yeti, fenix);
 
@@ -577,6 +513,64 @@ function enviarPosicion(x, y) {
       x,
       y,
     }),
+  }).then(function (res) {
+    if (res.ok) {
+      res.json().then(function ({ enemigos }) {
+        console.log(enemigos);
+        enemigos.forEach(function (enemigo) {
+          let mokeponEnemigo = null;
+          const mokeponNombre = enemigo.mokepon.nombre || "";
+          if (mokeponNombre === "Hipodogue") {
+            let mokeponEnemigo = new Mokepon(
+              "Hipodogue",
+              "img/hipodogue.png",
+              5,
+              "img/hipodogueCara.png"
+            );
+          } else if (mokeponNombre === "Capipepo") {
+            mokeponEnemigo = new Mokepon(
+              "Capipepo",
+              "img/capipepo.png",
+              5,
+              "img/capipepoCara.png"
+            );
+          } else if (mokeponNombre === "Ratigueya") {
+            mokeponEnemigo = new Mokepon(
+              "Ratigueya",
+              "img/ratigueya.png",
+              5,
+              "img/ratigueyaCara.png"
+            );
+          } else if (mokeponNombre === "Ness") {
+            mokeponEnemigo = new Mokepon(
+              "Ness",
+              "img/Ness.png",
+              5,
+              "img/Ness.png"
+            );
+          } else if (mokeponNombre === "Yeti") {
+            mokeponEnemigo = new Mokepon(
+              "Yeti",
+              "img/Yeti.png",
+              5,
+              "img/Yeti.png"
+            );
+          } else if (mokeponNombre === "Fenix") {
+            mokeponEnemigo = new Mokepon(
+              "Fenix",
+              "img/fenix2.png",
+              5,
+              "img/fenix2.png"
+            );
+          }
+
+          mokeponEnemigo.x = enemigo.x;
+          mokeponEnemigo.y = enemigo.y;
+
+          mokeponEnemigo.pintarMokepon();
+        });
+      });
+    }
   });
 }
 
@@ -622,7 +616,7 @@ function sePresionoUnaTecla(event) {
 
 function iniciarMapa() {
   mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador);
-  intervalo = setInterval(pintarCanvas, 500);
+  intervalo = setInterval(pintarCanvas, 200);
 
   window.addEventListener("keydown", sePresionoUnaTecla);
 
