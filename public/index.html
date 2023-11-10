@@ -21,20 +21,37 @@
       <h2 class="subtitulo">Recorre el mapa</h2>
       <canvas id="mapa"></canvas>
       <section id="movimiento">
-        <button onmouseup="detenerMovimiento()" onmousedown="moverArriba()">
+        <button
+          onmouseup="detenerMovimiento()"
+          ontouchend="detenerMovimiento()"
+          onmousedown="moverArriba()"
+          ontouchstart="moverArriba()"
+        >
           Arriba
         </button>
         <div>
           <button
             onmouseup="detenerMovimiento()"
+            ontouchend="detenerMovimiento()"
             onmousedown="moverIzquierda()"
+            ontouchstart="moverIzquierda()"
           >
             Izquierda
           </button>
-          <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">
+          <button
+            onmouseup="detenerMovimiento()"
+            ontouchend="detenerMovimiento()"
+            onmousedown="moverAbajo()"
+            ontouchstart="moverAbajo()"
+          >
             Abajo
           </button>
-          <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">
+          <button
+            onmouseup="detenerMovimiento()"
+            ontouchend="moverDerecha()"
+            onmousedown="moverDerecha()"
+            ontouchstart="moverDerecha()"
+          >
             Derecha
           </button>
         </div>
