@@ -1,3 +1,5 @@
+const SERVER="http://192.168.0.5:8080"
+
 const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
 const sectionBotonReiniciar = document.getElementById("boton-reiniciar");
 const botonMascotaJugador = document.getElementById("boton-mascota");
@@ -176,8 +178,6 @@ fenix.ataques.push(...FENIX_ATAQUES);
 mokepones.push(hipodogue, capipepo, ratigueya, ness, yeti, fenix);
 
 function iniciarJuego() {
-  /* console.log("iniciando el juego"); */
-
   sectionSeleccionarAtaque.style.display = "none";
   sectionVerMapa.style.display = "none";
 
@@ -208,7 +208,7 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego() {
-  fetch("http://192.168.0.5:8080/unirse").then(function (res) {
+  fetch(`${SERVER}/unirse`).then(function (res) {
     if (res.ok) {
       res.text().then(function (respuesta) {
         console.log("respuesta: ", respuesta);
@@ -253,7 +253,7 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMokepon(mascotaJugador) {
-  fetch(`http://192.168.0.5:8080/mokepon/${jugadorId}`, {
+  fetch(`${SERVER}/mokepon/${jugadorId}`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -324,7 +324,7 @@ function secuenciaAtaque() {
 }
 
 function enviarAtaques() {
-  fetch(`http://192.168.0.5:8080/mokepon/${jugadorId}/ataques`, {
+  fetch(`${SERVER}/mokepon/${jugadorId}/ataques`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -338,7 +338,7 @@ function enviarAtaques() {
 }
 
 function obtenerAtaques() {
-  fetch(`http://192.168.0.5:8080/mokepon/${enemigoId}/ataques`).then(function (
+  fetch(`${SERVER}/mokepon/${enemigoId}/ataques`).then(function (
     res
   ) {
     if (res.ok) {
@@ -528,7 +528,7 @@ function pintarCanvas() {
 
 function enviarPosicion(x, y) {
   console.log("jugadorId: ", jugadorId);
-  fetch(`http://192.168.0.5:8080/mokepon/${jugadorId}/posicion`, {
+  fetch(`${SERVER}/mokepon/${jugadorId}/posicion`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
