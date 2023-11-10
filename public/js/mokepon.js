@@ -59,6 +59,7 @@ let mapaBackground = new Image();
 mapaBackground.src = "img/mokeMap.png";
 let alturaQueBuscamos;
 let anchoDelMapa = window.innerWidth - 20;
+
 const anchoMaximoDelMapa = 350;
 if (anchoDelMapa > anchoMaximoDelMapa) {
   anchoDelMapa = anchoMaximoDelMapa - 20;
@@ -207,7 +208,7 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego() {
-  fetch("http://localhost:8080/unirse").then(function (res) {
+  fetch("http://192.168.0.5:8080/unirse").then(function (res) {
     if (res.ok) {
       res.text().then(function (respuesta) {
         console.log("respuesta: ", respuesta);
@@ -252,7 +253,7 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMokepon(mascotaJugador) {
-  fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+  fetch(`http://192.168.0.5:8080/mokepon/${jugadorId}`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -323,7 +324,7 @@ function secuenciaAtaque() {
 }
 
 function enviarAtaques() {
-  fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`, {
+  fetch(`http://192.168.0.5:8080/mokepon/${jugadorId}/ataques`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -333,11 +334,11 @@ function enviarAtaques() {
     }),
   });
 
-  intervalo = setInterval(obtenerAtaques, 200);
+  intervalo = setInterval(obtenerAtaques, 50);
 }
 
 function obtenerAtaques() {
-  fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`).then(function (
+  fetch(`http://192.168.0.5:8080/mokepon/${enemigoId}/ataques`).then(function (
     res
   ) {
     if (res.ok) {
@@ -527,7 +528,7 @@ function pintarCanvas() {
 
 function enviarPosicion(x, y) {
   console.log("jugadorId: ", jugadorId);
-  fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+  fetch(`http://192.168.0.5:8080/mokepon/${jugadorId}/posicion`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -645,7 +646,7 @@ function sePresionoUnaTecla(event) {
 
 function iniciarMapa() {
   mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador);
-  intervalo = setInterval(pintarCanvas, 200);
+  intervalo = setInterval(pintarCanvas, 50);
 
   window.addEventListener("keydown", sePresionoUnaTecla);
 
