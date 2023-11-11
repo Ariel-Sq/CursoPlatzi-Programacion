@@ -540,8 +540,9 @@ function enviarPosicion(x, y) {
   }).then(function (res) {
     if (res.ok) {
       res.json().then(function ({ enemigos }) {
-        console.log(enemigos);
-        mokeponesEnemigos = enemigos.map(function (enemigo) {
+        mokeponesEnemigos = enemigos
+        .filter((enemigo) => enemigo.mokepon)
+        .map(function (enemigo) {
           let mokeponEnemigo = null;
           const mokeponNombre = enemigo.mokepon.nombre || "";
           if (mokeponNombre === "Hipodogue") {
